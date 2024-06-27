@@ -1,5 +1,7 @@
+import { useQuery } from '@tanstack/react-query'
 import { DollarSign } from 'lucide-react'
 
+import { getMonthRevenue } from '../../../api-requests/get-month-revenue'
 import {
   Card,
   CardContent,
@@ -7,9 +9,12 @@ import {
   CardTitle,
 } from '../../../components/ui/card'
 
-interface MonthRevenueCardProps {}
+export function MonthRevenueCard() {
+  const { data: monthRevenue } = useQuery({
+    queryKey: ['metrics', 'month-revenue'],
+    queryFn: getMonthRevenue,
+  })
 
-export function MonthRevenueCard({}: MonthRevenueCardProps) {
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
@@ -20,12 +25,34 @@ export function MonthRevenueCard({}: MonthRevenueCardProps) {
       </CardHeader>
 
       <CardContent className="space-y-1">
-        <span className="text-2xl font-bold tracking-tighter">R$ 1249,60</span>
+        {monthRevenue && (
+          <>
+            <span className="text-2xl font-bold tracking-tighter">
+              {(monthRevenue.receipt / 100).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </span>
 
-        <p>
-          <span className="text-emerald-500 dark:text-emerald-400">+2%</span> em
-          relação ao mês passado
-        </p>
+            <p className="text-xs text-muted-foreground">
+              {monthRevenue.diffFromLastMonth >= 0 ? (
+                <>
+                  <span className="text-emerald-500 dark:text-emerald-400">
+                    +{monthRevenue.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              ) : (
+                <>
+                  <span className="text-rose-500 dark:text-rose-400">
+                    -{monthRevenue.diffFromLastMonth}%
+                  </span>{' '}
+                  em relação ao mês passado
+                </>
+              )}
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   )

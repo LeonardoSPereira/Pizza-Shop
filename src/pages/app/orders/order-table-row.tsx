@@ -179,7 +179,7 @@ export function OrderTableRow({ order }: OrderTableRowProps) {
           size="xs"
           disabled={
             !['pending', 'processing'].includes(order.status) ||
-            isDispatchingOrder
+            isCancelingOrder
           }
           onClick={() => cancelOrderFn({ orderId: order.orderId })}
         >
