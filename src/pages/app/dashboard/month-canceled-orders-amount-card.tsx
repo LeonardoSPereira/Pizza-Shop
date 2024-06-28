@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../../../components/ui/card'
+import { MetricCardSkeleton } from './metric-card-skeleton'
 
 export function MonthCanceledOrdersAmountCard() {
   const { data: monthCanceledOrdersAmount } = useQuery({
@@ -26,7 +27,7 @@ export function MonthCanceledOrdersAmountCard() {
       </CardHeader>
 
       <CardContent className="space-y-1">
-        {monthCanceledOrdersAmount && (
+        {monthCanceledOrdersAmount ? (
           <>
             <span className="text-2xl font-bold tracking-tighter">
               {monthCanceledOrdersAmount.amount.toLocaleString('pt-BR')}
@@ -50,6 +51,8 @@ export function MonthCanceledOrdersAmountCard() {
               )}
             </p>
           </>
+        ) : (
+          <MetricCardSkeleton />
         )}
       </CardContent>
     </Card>
