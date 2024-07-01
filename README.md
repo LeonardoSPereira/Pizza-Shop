@@ -39,7 +39,7 @@ git clone https://github.com/LeonardoSPereira/Pizza-Shop
 git clone https://github.com/rocketseat-education/pizzashop-api
 ```
 
-After cloning the repositories, acess the API repository and follow the instructions in the README file to run the API.<br>
+After cloning the repositories, access the API repository and follow the instructions in the README file to run the API.<br>
 After running the API, access the web repository and use the following command in your terminal to install the dependencies. I'm using pnpm in this example, but you can use npm as well:
 
 ```sh
