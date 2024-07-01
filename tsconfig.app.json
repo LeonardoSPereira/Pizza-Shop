@@ -25,5 +25,5 @@
 
     "types": ["vitest/globals"]
   },
-  "include": ["src", "test"]
+  "include": ["src", "test", "test/store-profile.e2e-spec.ts"]
 }
